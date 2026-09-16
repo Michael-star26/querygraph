@@ -149,7 +149,7 @@
 							</div>
 							<div class="flex items-center gap-1.5">
 								<Mail class="h-3.5 w-3.5 text-foreground/70" />
-								<a href="mailto:hello@querygraph.dev" class="hover:text-foreground transition-colors">hello@querygraph.dev</a>
+								<a href="mailto:michael@querygraph.dev" class="hover:text-foreground transition-colors">michael@querygraph.dev</a>
 							</div>
 						</div>
 					</div>
