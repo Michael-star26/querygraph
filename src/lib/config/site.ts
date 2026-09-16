@@ -2,15 +2,16 @@ export const siteConfig = {
 	name: 'QueryGraph Codelabs',
 	domain: 'querygraph.dev',
 	portfolioDomain: 'michael.querygraph.dev',
-	description: 'High-performance software engineering studio & custom web solutions.',
+	description: 'Software engineering studio building B2B web applications, backend APIs, and data-driven platforms.',
 	mainNav: [
 		{ title: 'Services', href: '/#services' },
 		{ title: 'Architecture', href: '/#architecture' },
 		{ title: 'Case Studies', href: '/#work' },
-		{ title: 'Updates', href: '/#updates' }
+		{ title: 'Studio Log', href: '/#updates' }
 	],
 	links: {
 		github: 'https://github.com/Michael-star26',
-		personalPortfolio: 'https://michael.querygraph.dev'
+		personalPortfolio: 'https://michael.querygraph.dev',
+		email: 'michael@querygraph.dev'
 	}
 };
