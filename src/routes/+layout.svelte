@@ -35,8 +35,19 @@
 			
 			<!-- Brand Logo -->
 			<a href="/" class="flex items-center gap-2.5 group">
-				<div class="flex h-9 w-9 items-center justify-center rounded-lg border border-border bg-card text-foreground transition-colors group-hover:border-foreground/30">
-					<Terminal class="h-4 w-4 text-foreground" />
+				<div class="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors group-hover:border-emerald-500/50">
+					<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<!-- Node 1 -->
+						<circle cx="5" cy="5" r="2" />
+						<!-- Node 2 -->
+						<circle cx="19" cy="5" r="2" />
+						<!-- Node 3 -->
+						<circle cx="12" cy="19" r="2" />
+						<!-- System Connections -->
+						<path d="M7 5h10" />
+						<path d="M6.5 6.5l4.5 11" />
+						<path d="M17.5 6.5l-4.5 11" />
+					</svg>
 				</div>
 				<div class="flex flex-col">
 					<span class="font-mono text-sm font-bold tracking-tight">QueryGraph</span>
@@ -136,7 +147,20 @@
 				<div class="md:col-span-2 flex flex-col justify-between gap-4">
 					<div class="space-y-3">
 						<div class="flex items-center gap-2">
-							<Terminal class="h-4 w-4 text-foreground" />
+							<div class="flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors group-hover:border-emerald-500/50">
+								<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<!-- Node 1 -->
+									<circle cx="5" cy="5" r="2" />
+									<!-- Node 2 -->
+									<circle cx="19" cy="5" r="2" />
+									<!-- Node 3 -->
+									<circle cx="12" cy="19" r="2" />
+									<!-- System Connections -->
+									<path d="M7 5h10" />
+									<path d="M6.5 6.5l4.5 11" />
+									<path d="M17.5 6.5l-4.5 11" />
+								</svg>
+							</div>
 							<span class="font-mono text-sm font-bold">QueryGraph Codelabs</span>
 						</div>
 						<p class="text-xs text-muted-foreground/90 max-w-sm leading-relaxed">
