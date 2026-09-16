@@ -71,7 +71,7 @@
 				<Separator orientation="vertical" class="h-4" />
 
 				<Button variant="default" size="sm" class="font-medium text-xs" onclick={openModal}>
-					Start a Project
+					Discuss a Project
 				</Button>
 			</div>
 

@@ -82,10 +82,22 @@
 	];
 
 	const techStack = [
-		{ category: 'Frontend Engines', items: ['SvelteKit 5 (Runes)', 'Angular', 'TypeScript', 'Tailwind CSS v4'] },
-		{ category: 'Backend & APIs', items: ['Python (Flask)', 'Java (Spring)', 'Node.js'] },
-		{ category: 'Data & CMS', items: ['PostgreSQL', 'MySQL', 'Sanity.io'] },
-		{ category: 'Infrastructure', items: ['Vercel', 'Git / GitHub', 'CI/CD Pipelines'] }
+		{
+			category: 'Frontend',
+			items: ['SvelteKit', 'Angular', 'TypeScript', 'Tailwind CSS']
+		},
+		{
+			category: 'Backend & APIs',
+			items: ['Python (Flask)']
+		},
+		{
+			category: 'Data & Persistence',
+			items: ['MongoDB', 'MySQL']
+		},
+		{
+			category: 'Infrastructure',
+			items: ['Vercel', 'Git / GitHub', 'CI/CD']
+		}
 	];
 </script>
 
@@ -411,7 +423,7 @@
 			<Badge variant="secondary" class="font-mono text-[11px] uppercase tracking-wider">Architecture</Badge>
 			<h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Core Technologies</h2>
 			<p class="text-sm text-muted-foreground max-w-xl">
-				Proven languages and frameworks chosen for reliability, security, and long-term maintainability.
+				Technology is selected according to project requirements, existing infrastructure, performance constraints, and long-term maintainability
 			</p>
 		</div>
 
