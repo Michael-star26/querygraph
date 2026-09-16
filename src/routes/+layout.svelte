@@ -188,8 +188,8 @@
 								<ArrowUpRight class="h-3 w-3" />
 							</a>
 						</li>
-						<li class="pt-2 text-[11px] text-muted-foreground/60">
-							<span>Privacy Policy & Terms</span>
+						<li class="text-muted-foreground/90 hover:text-foreground transition-colors">
+							<a href="/privacy">Privacy Policy & Terms</a>
 						</li>
 					</ul>
 				</div>
