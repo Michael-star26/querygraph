@@ -4,7 +4,7 @@
 	import { Badge } from '$lib/components/ui/badge';
 	import { siteConfig } from '$lib/config/site';
 	import { Terminal, Send, CheckCircle2, ShieldAlert } from 'lucide-svelte';
-
+	import * as Select from "$lib/components/ui/select/index.js"
 	let { open = $bindable(false) } = $props();
 
 	let submitted = $state(false);
