@@ -1,166 +1,244 @@
 <script lang="ts">
-	import * as Dialog from '$lib/components/ui/dialog';
+	import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '$lib/components/ui/dialog';
 	import { Button } from '$lib/components/ui/button';
 	import { Badge } from '$lib/components/ui/badge';
-	import { Terminal, Send, CheckCircle2 } from 'lucide-svelte';
+	import { siteConfig } from '$lib/config/site';
+	import { Terminal, Send, CheckCircle2, ShieldAlert } from 'lucide-svelte';
 
 	let { open = $bindable(false) } = $props();
 
-	// Form state managed via Svelte 5 runes
+	let submitted = $state(false);
+	let isSubmitting = $state(false);
+
+	// Form State
 	let name = $state('');
 	let email = $state('');
-	let projectType = $state('web-app');
-	let budget = $state('<$5k');
-	let message = $state('');
-	let isSubmitting = $state(false);
-	let isSuccess = $state(false);
+	let company = $state('');
+	let website = $state('');
+	let selectedScopes = $state<string[]>([]);
+	let stage = $state('requirements-defined');
+	let timeline = $state('1-3-months');
+	let budget = $state('5k-15k');
+	let repoUrl = $state('');
+	let projectDetails = $state('');
+	let ndaRequired = $state(false);
+	let preferredContact = $state('email');
+	let timezone = $state('');
+	let agreePrivacy = $state(false);
 
-	const projectTypes = [
-		{ id: 'web-app', label: 'Reactive Web App (SvelteKit / Angular)' },
-		{ id: 'backend-api', label: 'Backend Microservices / APIs (Python / Java)' },
-		{ id: 'actuarial-data', label: 'Quantitative Data Pipeline / Modeling' },
-		{ id: 'consulting', label: 'Architecture & System Design' }
+	const scopeOptions = [
+		'Business Web Applications',
+		'Reactive Web Platforms',
+		'Backend Systems & APIs',
+		'Technical Architecture & Discovery',
+		'Quantitative & Data Systems',
+		'Maintenance & Engineering Support',
+		'Fullstack Web Applcations',
+		'Other'
 	];
 
-	const budgetRanges = [
-		{ id: '<$5k', label: '< $5k' },
-		{ id: '$5k-$15k', label: '$5k - $15k' },
-		{ id: '$15k+', label: '$15k+' }
-	];
+	function toggleScope(scope: string) {
+		if (selectedScopes.includes(scope)) {
+			selectedScopes = selectedScopes.filter((s) => s !== scope);
+		} else {
+			selectedScopes = [...selectedScopes, scope];
+		}
+	}
 
 	async function handleSubmit(e: SubmitEvent) {
 		e.preventDefault();
+		if (!agreePrivacy) return;
+
 		isSubmitting = true;
-
-		// Simulated API intake dispatch
-		await new Promise((r) => setTimeout(r, 800));
-
+		// Simulated form submission delay
+		await new Promise((resolve) => setTimeout(resolve, 800));
 		isSubmitting = false;
-		isSuccess = true;
+		submitted = true;
 	}
 
 	function resetForm() {
-		name = '';
-		email = '';
-		message = '';
-		isSuccess = false;
+		submitted = false;
 		open = false;
 	}
 </script>
 
-<Dialog.Root bind:open>
-	<Dialog.Content class="sm:max-w-lg bg-card border-border text-foreground">
-		<Dialog.Header class="space-y-2">
+<Dialog bind:open>
+	<DialogContent class="max-w-2xl max-h-[90vh] overflow-y-auto bg-card border-border/80 text-foreground p-6">
+		<DialogHeader class="space-y-2 border-b border-border/40 pb-4">
 			<div class="flex items-center gap-2">
-				<Badge variant="outline" class="font-mono text-[10px] border-emerald-500/30 text-emerald-400 bg-emerald-500/10">
-					Project Intake
-				</Badge>
+				<Terminal class="h-4 w-4 text-emerald-400" />
+				<DialogTitle class="font-mono text-base font-bold">Start a Project with QueryGraph</DialogTitle>
 			</div>
-			<Dialog.Title class="text-xl font-bold font-mono flex items-center gap-2">
-				<Terminal class="h-4 w-4 text-foreground" />
-				Start a Project with QueryGraph
-			</Dialog.Title>
-			<Dialog.Description class="text-xs text-muted-foreground">
-				Tell us about your technical requirements, estimated timeline, and project scope.
-			</Dialog.Description>
-		</Dialog.Header>
+			<DialogDescription class="text-xs text-muted-foreground/90 leading-relaxed">
+				Tell us what you're building, where the project currently stands, and what constraints we should know about.
+			</DialogDescription>
+		</DialogHeader>
 
-		{#if isSuccess}
-			<div class="py-8 flex flex-col items-center text-center space-y-3">
-				<div class="h-12 w-12 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
+		{#if submitted}
+			<div class="py-8 text-center space-y-4">
+				<div class="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-500/10 border border-emerald-500/30 mx-auto text-emerald-400">
 					<CheckCircle2 class="h-6 w-6" />
 				</div>
-				<h3 class="text-base font-semibold">Inquiry Received</h3>
-				<p class="text-xs text-muted-foreground max-w-xs">
-					Thank you, {name || 'client'}! We'll review your project scope and get back to you within 24 hours.
+				<h3 class="text-base font-semibold font-mono text-foreground">Project Inquiry Received</h3>
+				<p class="text-xs text-muted-foreground max-w-md mx-auto leading-relaxed">
+					Thank you. QueryGraph will review your requirements and respond via email to <span class="text-foreground font-mono">{email}</span>. For complex technical specifications, we will propose a brief technical discovery call before preparing a formal scope.
 				</p>
-				<Button variant="outline" size="sm" class="font-mono text-xs mt-4" onclick={resetForm}>
+				<Button variant="outline" size="sm" class="font-mono text-xs" onclick={resetForm}>
 					Close Window
 				</Button>
 			</div>
 		{:else}
-			<form onsubmit={handleSubmit} class="space-y-4 pt-2">
-				<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-					<div class="space-y-1.5">
-						<label for="intake-name" class="text-xs font-mono font-medium text-muted-foreground">Name</label>
-						<input
-							id="intake-name"
-							type="text"
-							required
-							bind:value={name}
-							placeholder="Alex Mercer"
-							class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-foreground"
-						/>
-					</div>
-					<div class="space-y-1.5">
-						<label for="intake-email" class="text-xs font-mono font-medium text-muted-foreground">Email</label>
-						<input
-							id="intake-email"
-							type="email"
-							required
-							bind:value={email}
-							placeholder="alex@company.com"
-							class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-foreground"
-						/>
+			<form onsubmit={handleSubmit} class="space-y-6 pt-2">
+				
+				<!-- Security & Confidentiality Warning -->
+				<div class="border border-amber-500/30 bg-amber-500/10 rounded-lg p-3 flex items-start gap-2.5 text-xs text-amber-200/90">
+					<ShieldAlert class="h-4 w-4 text-amber-400 shrink-0 mt-0.5" />
+					<p class="leading-relaxed">
+						Please do <strong class="text-amber-300">not</strong> submit passwords, API keys, database credentials, or proprietary source code secrets through this form. Confidential discovery can be handled under NDA.
+					</p>
+				</div>
+
+				<!-- Section 1: Contact -->
+				<div class="space-y-3">
+					<h4 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wider">1. Contact Information</h4>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						<div class="space-y-1">
+							<label for="name" class="text-[11px] font-mono text-muted-foreground">Full Name *</label>
+							<input id="name" type="text" required bind:value={name} placeholder="e.g. Alex Chen" class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground" />
+						</div>
+						<div class="space-y-1">
+							<label for="email" class="text-[11px] font-mono text-muted-foreground">Work Email *</label>
+							<input id="email" type="email" required bind:value={email} placeholder="alex@company.com" class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground" />
+						</div>
+						<div class="space-y-1">
+							<label for="company" class="text-[11px] font-mono text-muted-foreground">Company / Organization (Optional)</label>
+							<input id="company" type="text"  bind:value={company} placeholder="e.g. Acme Corp" class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground" />
+						</div>
+						<div class="space-y-1">
+							<label for="website" class="text-[11px] font-mono text-muted-foreground">Company Website (Optional)</label>
+							<input id="website" type="url" bind:value={website} placeholder="https://acme.com" class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground" />
+						</div>
 					</div>
 				</div>
 
-				<!-- Scope / Service Selection -->
-				<div class="space-y-1.5">
-					<label class="text-xs font-mono font-medium text-muted-foreground">Primary Scope</label>
-					<div class="grid grid-cols-1 gap-1.5">
-						{#each projectTypes as type}
+				<!-- Section 2: Scope -->
+				<div class="space-y-3">
+					<h4 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wider">2. Primary Scope (Select all that apply)</h4>
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+						{#each scopeOptions as option}
 							<button
 								type="button"
-								onclick={() => (projectType = type.id)}
-								class="flex items-center justify-between text-left text-xs px-3 py-2 rounded-md border transition-colors {projectType === type.id ? 'border-foreground bg-accent/50 text-foreground' : 'border-border/60 bg-muted/20 text-muted-foreground hover:border-border'}"
+								onclick={() => toggleScope(option)}
+								class="flex items-center gap-2 border rounded-md p-2 text-left text-xs transition-colors {selectedScopes.includes(option) ? 'border-emerald-500 bg-emerald-500/10 text-foreground' : 'border-border/80 bg-background/50 text-muted-foreground hover:border-foreground/40'}"
 							>
-								<span>{type.label}</span>
+								<div class="h-3.5 w-3.5 rounded-sm border border-border flex items-center justify-center shrink-0 {selectedScopes.includes(option) ? 'bg-emerald-500 border-emerald-500' : ''}">
+									{#if selectedScopes.includes(option)}
+										<span class="text-[9px] text-black font-bold">✓</span>
+									{/if}
+								</div>
+								<span>{option}</span>
 							</button>
 						{/each}
 					</div>
 				</div>
 
-				<!-- Budget Selection -->
-				<div class="space-y-1.5">
-					<label class="text-xs font-mono font-medium text-muted-foreground">Estimated Budget</label>
-					<div class="grid grid-cols-3 gap-2">
-						{#each budgetRanges as b}
-							<button
-								type="button"
-								onclick={() => (budget = b.id)}
-								class="text-center text-xs py-1.5 rounded-md border transition-colors font-mono {budget === b.id ? 'border-foreground bg-accent/50 text-foreground' : 'border-border/60 bg-muted/20 text-muted-foreground hover:border-border'}"
-							>
-								{b.label}
-							</button>
-						{/each}
+				<!-- Section 3: Maturity & Timeline -->
+				<div class="space-y-3">
+					<h4 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wider">3. Project Stage & Timeline</h4>
+					<div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+						<div class="space-y-1">
+							<label for="stage" class="text-[11px] font-mono text-muted-foreground">Current Stage</label>
+							<select id="stage" bind:value={stage} class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground">
+								<option value="planning">Idea / Planning</option>
+								<option value="requirements-defined">Requirements Defined</option>
+								<option value="existing-app">Existing Application</option>
+								<option value="migration">Migration / Rewrite</option>
+							</select>
+						</div>
+
+						<div class="space-y-1">
+							<label for="timeline" class="text-[11px] font-mono text-muted-foreground">Target Timeline</label>
+							<select id="timeline" bind:value={timeline} class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground">
+								<option value="no-fixed">No fixed deadline</option>
+								<option value="1-3-months">1–3 months</option>
+								<option value="3-6-months">3–6 months</option>
+								<option value="6-plus-months">6+ months</option>
+								<option value="urgent">Specific target deadline</option>
+							</select>
+						</div>
+
+						<div class="space-y-1">
+							<label for="budget" class="text-[11px] font-mono text-muted-foreground">Estimated Budget (USD)</label>
+							<select id="budget" bind:value={budget} class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground">
+								<option value="under-5k">&lt; $5,000 USD</option>
+								<option value="5k-15k">$5,000 – $15,000 USD</option>
+								<option value="15k-plus">$15,000+ USD</option>
+								<option value="undisclosed">Prefer to discuss</option>
+							</select>
+						</div>
 					</div>
 				</div>
 
-				<!-- Description / Message -->
-				<div class="space-y-1.5">
-					<label for="intake-message" class="text-xs font-mono font-medium text-muted-foreground">Project Details</label>
-					<textarea
-						id="intake-message"
-						rows="3"
-						required
-						bind:value={message}
-						placeholder="Describe project objectives, key features, and timeline constraints..."
-						class="w-full rounded-md border border-border bg-background px-3 py-2 text-xs text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:ring-1 focus:ring-foreground resize-none"
-					></textarea>
+				<!-- Section 4: Details & Technical Material -->
+				<div class="space-y-3">
+					<h4 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wider">4. Technical Specifications</h4>
+					<div class="space-y-3">
+						<div class="space-y-1">
+							<label for="repoUrl" class="text-[11px] font-mono text-muted-foreground">Existing Spec / Repository / API Docs URL (Optional)</label>
+							<input id="repoUrl" type="url" bind:value={repoUrl} placeholder="https://github.com/company/project or doc link" class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground font-mono" />
+						</div>
+
+						<div class="space-y-1">
+							<label for="details" class="text-[11px] font-mono text-muted-foreground">Project Description & Requirements *</label>
+							<textarea id="details" required rows="3" bind:value={projectDetails} placeholder="Describe what you need engineered, system constraints, or integrations required..." class="w-full rounded-md border border-border bg-background p-3 text-xs focus:outline-none focus:border-foreground"></textarea>
+						</div>
+					</div>
 				</div>
 
-				<Dialog.Footer class="pt-2">
-					<Button type="submit" variant="default" size="sm" class="w-full gap-2 font-mono text-xs" disabled={isSubmitting}>
+				<!-- Section 5: Preferences & NDA -->
+				<div class="space-y-3 border-t border-border/40 pt-4">
+					<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+						<div class="space-y-1">
+							<label for="contactPref" class="text-[11px] font-mono text-muted-foreground">Preferred Contact Method</label>
+							<select id="contactPref" bind:value={preferredContact} class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground">
+								<option value="email">Email</option>
+								<option value="video">Video Call</option>
+								<option value="either">Either</option>
+							</select>
+						</div>
+
+						<div class="space-y-1">
+							<label for="timezone" class="text-[11px] font-mono text-muted-foreground">Preferred Timezone (Optional)</label>
+							<input id="timezone" type="text" bind:value={timezone} placeholder="e.g. KST (UTC+9), EST, CET" class="w-full rounded-md border border-border bg-background px-3 py-1.5 text-xs focus:outline-none focus:border-foreground font-mono" />
+						</div>
+					</div>
+
+					<div class="flex items-center gap-2 pt-1">
+						<input id="nda" type="checkbox" bind:checked={ndaRequired} class="rounded border-border text-emerald-500 focus:ring-0" />
+						<label for="nda" class="text-xs text-muted-foreground">This inquiry involves confidential details. We require an NDA prior to full technical discovery.</label>
+					</div>
+
+					<div class="flex items-center gap-2">
+						<input id="privacy" type="checkbox" required bind:checked={agreePrivacy} class="rounded border-border text-emerald-500 focus:ring-0" />
+						<label for="privacy" class="text-xs text-muted-foreground">I agree to the <a href="/privacy" target="_blank" class="text-foreground underline">QueryGraph Privacy Policy</a>.</label>
+					</div>
+				</div>
+
+				<!-- Submit Button -->
+				<div class="flex justify-end gap-3 pt-2">
+					<Button type="button" variant="outline" size="sm" class="font-mono text-xs" onclick={() => (open = false)}>
+						Cancel
+					</Button>
+					<Button type="submit" disabled={isSubmitting || !agreePrivacy} size="sm" class="font-medium text-xs gap-2 bg-primary">
 						{#if isSubmitting}
-							<span>Submitting Scope...</span>
+							<span>Submitting...</span>
 						{:else}
+							<span>Submit Project Brief</span>
 							<Send class="h-3.5 w-3.5" />
-							<span>Submit Project Inquiry</span>
 						{/if}
 					</Button>
-				</Dialog.Footer>
+				</div>
 			</form>
 		{/if}
-	</Dialog.Content>
-</Dialog.Root>
+	</DialogContent>
+</Dialog>

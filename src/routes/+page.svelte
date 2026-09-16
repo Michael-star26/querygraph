@@ -16,7 +16,8 @@
 		Layers,
 		ArrowUpRight,
 		Newspaper,
-		Compass
+		Compass,
+		LineChart
 	} from 'lucide-svelte';
 
 	let { data }: { data: PageData } = $props();
@@ -29,8 +30,8 @@
 	const services = [
 		{
 			icon: Code2,
-			title: 'Reactive Web Platforms',
-			description: 'High-speed marketing sites, studio portals, and SSR web applications engineered with SvelteKit 5 runes and modern web standards.',
+			title: 'Web Platforms',
+			description: 'SSR web applications, marketing platforms, customer portals and interactive web experiences.',
 			tags: ['SvelteKit 5', 'TypeScript', 'Tailwind v4']
 		},
 		{
@@ -50,6 +51,12 @@
 			title: 'Technical Architecture & Discovery',
 			description: 'System design, database modeling, API specification, and technical proof-of-concept development for new products and migrations.',
 			tags: ['System Design', 'Schema Modeling', 'PoC Build']
+		},
+		{
+			icon: LineChart,
+			title: 'Quantitative & Data Systems',
+			description: 'Data pipelines, analytical workflows, statistical models and reporting systems for data-intensive applications.',
+			tags: ['Python', 'PostgreSQL', 'Data Pipelines']
 		}
 	];
 
@@ -58,9 +65,9 @@
 			title: 'SokoCommerce Platform',
 			category: 'Full-Stack Business Application',
 			problem: 'Requires a decoupled commerce engine with fast catalog exploration, user authentication, and inventory management.',
-			built: 'Angular SPA frontend paired with a modular Flask REST API backend, JWT authentication, and structured PostgreSQL storage.',
-			result: 'Deployed production platform with sub-100ms API response targets and a streamlined checkout workflow.',
-			stack: ['Angular', 'NG-ZORRO', 'Flask', 'PostgreSQL'],
+			built: 'Angular SPA frontend paired with a modular Flask REST API backend, JWT authentication, and structured MySQL storage.',
+			result: 'Deployed production platform with modular frontend/backend architecture and documented deployment workflow',
+			stack: ['Angular', 'NG-ZORRO', 'Flask', 'MySQL'],
 			link: 'https://michael.querygraph.dev'
 		},
 		{
@@ -68,7 +75,7 @@
 			category: 'Internal Web Architecture',
 			problem: 'Need for a reusable, type-safe web foundation powering studio client portals and high-speed SSR marketing interfaces.',
 			built: 'SvelteKit 5 SSR architecture with explicit state runes, Tailwind v4 styling, dynamic modal dialogs, and edge deployment.',
-			result: 'Lightweight foundation delivering sub-100ms initial page load, zero layout shift, and clean code maintainability.',
+			result: 'Lightweight foundation delivering fast initial page load, zero layout shift, and clean code maintainability.',
 			stack: ['SvelteKit 5', 'TypeScript', 'Tailwind v4'],
 			link: '/#architecture'
 		}
@@ -179,40 +186,172 @@
 		</div>
 	</section>
 
-	<!-- Technical Stack Section -->
-	<section id="architecture" class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-		<div class="space-y-4 mb-12">
-			<Badge variant="secondary" class="font-mono text-[11px] uppercase tracking-wider">Architecture</Badge>
-			<h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Core Technologies</h2>
+	<!-- Process / How We Deliver Section (Enterprise Timeline) -->
+	<section id="process" class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-12">
+		<div class="space-y-4">
+			<Badge variant="secondary" class="font-mono text-[11px] uppercase tracking-wider">Engagement Model</Badge>
+			<h2 class="text-2xl sm:text-3xl font-bold tracking-tight">How We Deliver</h2>
 			<p class="text-sm text-muted-foreground max-w-xl">
-				Proven languages and frameworks chosen for reliability, security, and long-term maintainability.
+				A disciplined, milestone-driven execution framework engineered for cross-border transparency, continuous integration, and strict scope control.
 			</p>
 		</div>
 
-		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-			{#each techStack as group}
-				<div class="border border-border/60 rounded-xl p-5 bg-card/40 space-y-4">
-					<h3 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wider border-b border-border/40 pb-2">
-						{group.category}
-					</h3>
-					<ul class="space-y-2.5">
-						{#each group.items as item}
-							<li class="flex items-center gap-2 text-xs text-muted-foreground/90">
-								<CheckCircle2 class="h-3.5 w-3.5 text-emerald-400 shrink-0" />
-								<span>{item}</span>
-							</li>
-						{/each}
-					</ul>
+		<!-- Vertical Timeline Container -->
+		<div class="relative border-l border-border/80 ml-3 md:ml-6 space-y-10 pl-6 md:pl-10">
+			
+			<!-- Phase 01 -->
+			<div class="relative group">
+				<div class="absolute -left-[31px] md:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background group-hover:border-emerald-500 group-hover:text-emerald-400 transition-colors">
+					<span class="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
 				</div>
-			{/each}
+				
+				<div class="space-y-3 border border-border/60 rounded-xl p-5 md:p-6 bg-card/30 backdrop-blur-sm transition-all hover:border-border">
+					<div class="flex flex-wrap items-center justify-between gap-2">
+						<span class="font-mono text-xs text-emerald-400 font-semibold uppercase tracking-wider">Phase 01 — Technical Discovery</span>
+						<Badge variant="outline" class="font-mono text-[10px] text-muted-foreground bg-muted/20">Week 1</Badge>
+					</div>
+					<h3 class="text-base font-semibold text-foreground">Architecture Audit & Requirements Mapping</h3>
+					<p class="text-xs text-muted-foreground/90 leading-relaxed max-w-2xl">
+						We analyze existing technical assets, audit legacy codebases or database schemas, identify security constraints, and map out core user flows and business domain logic.
+					</p>
+					<div class="border-t border-border/40 pt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-muted-foreground">
+						<span class="text-foreground font-semibold">Deliverable:</span>
+						<span>• Technical Requirements Document (TRD)</span>
+						<span>• Risk Matrix</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Phase 02 -->
+			<div class="relative group">
+				<div class="absolute -left-[31px] md:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background group-hover:border-emerald-500 group-hover:text-emerald-400 transition-colors">
+					<span class="h-1.5 w-1.5 rounded-full bg-muted-foreground group-hover:bg-emerald-400"></span>
+				</div>
+
+				<div class="space-y-3 border border-border/60 rounded-xl p-5 md:p-6 bg-card/30 backdrop-blur-sm transition-all hover:border-border">
+					<div class="flex flex-wrap items-center justify-between gap-2">
+						<span class="font-mono text-xs text-emerald-400 font-semibold uppercase tracking-wider">Phase 02 — System Blueprint</span>
+						<Badge variant="outline" class="font-mono text-[10px] text-muted-foreground bg-muted/20">Specification</Badge>
+					</div>
+					<h3 class="text-base font-semibold text-foreground">Schema Design & API Contract Modeling</h3>
+					<p class="text-xs text-muted-foreground/90 leading-relaxed max-w-2xl">
+						Prior to writing production code, we model relational database schemas, design typed REST/GraphQL API contracts, select framework primitives, and detail system boundary definitions.
+					</p>
+					<div class="border-t border-border/40 pt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-muted-foreground">
+						<span class="text-foreground font-semibold">Deliverable:</span>
+						<span>• OpenAPI/Swagger Specs</span>
+						<span>• Database ERD</span>
+						<span>• Tech Stack Manifest</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Phase 03 -->
+			<div class="relative group">
+				<div class="absolute -left-[31px] md:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background group-hover:border-emerald-500 group-hover:text-emerald-400 transition-colors">
+					<span class="h-1.5 w-1.5 rounded-full bg-muted-foreground group-hover:bg-emerald-400"></span>
+				</div>
+
+				<div class="space-y-3 border border-border/60 rounded-xl p-5 md:p-6 bg-card/30 backdrop-blur-sm transition-all hover:border-border">
+					<div class="flex flex-wrap items-center justify-between gap-2">
+						<span class="font-mono text-xs text-emerald-400 font-semibold uppercase tracking-wider">Phase 03 — Commercial Alignment</span>
+						<Badge variant="outline" class="font-mono text-[10px] text-muted-foreground bg-muted/20">Proposal</Badge>
+					</div>
+					<h3 class="text-base font-semibold text-foreground">Statement of Work (SOW) & Milestone Pricing</h3>
+					<p class="text-xs text-muted-foreground/90 leading-relaxed max-w-2xl">
+						We formulate a formal proposal establishing milestone schedules, IP transfer parameters, payment terms in USD, asynchronous status reporting cadences, and acceptance criteria.
+					</p>
+					<div class="border-t border-border/40 pt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-muted-foreground">
+						<span class="text-foreground font-semibold">Deliverable:</span>
+						<span>• Executed MSA/SOW</span>
+						<span>• Milestone Schedule</span>
+						<span>• Payment Terms</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Phase 04 -->
+			<div class="relative group">
+				<div class="absolute -left-[31px] md:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background group-hover:border-emerald-500 group-hover:text-emerald-400 transition-colors">
+					<span class="h-1.5 w-1.5 rounded-full bg-muted-foreground group-hover:bg-emerald-400"></span>
+				</div>
+
+				<div class="space-y-3 border border-border/60 rounded-xl p-5 md:p-6 bg-card/30 backdrop-blur-sm transition-all hover:border-border">
+					<div class="flex flex-wrap items-center justify-between gap-2">
+						<span class="font-mono text-xs text-emerald-400 font-semibold uppercase tracking-wider">Phase 04 — Iterative Execution</span>
+						<Badge variant="outline" class="font-mono text-[10px] text-muted-foreground bg-muted/20">Sprint Cycles</Badge>
+					</div>
+					<h3 class="text-base font-semibold text-foreground">Test-Driven Build & Continuous Integration</h3>
+					<p class="text-xs text-muted-foreground/90 leading-relaxed max-w-2xl">
+						Engineering proceeds through 2-week sprint cycles. Every feature is committed under strict TypeScript rules, covered by unit/integration tests, and deployed to staging environments for continuous client review.
+					</p>
+					<div class="border-t border-border/40 pt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-muted-foreground">
+						<span class="text-foreground font-semibold">Deliverable:</span>
+						<span>• Staging Deployments</span>
+						<span>• Weekly Async Logs</span>
+						<span>• Test Coverage Reports</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Phase 05 -->
+			<div class="relative group">
+				<div class="absolute -left-[31px] md:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background group-hover:border-emerald-500 group-hover:text-emerald-400 transition-colors">
+					<span class="h-1.5 w-1.5 rounded-full bg-muted-foreground group-hover:bg-emerald-400"></span>
+				</div>
+
+				<div class="space-y-3 border border-border/60 rounded-xl p-5 md:p-6 bg-card/30 backdrop-blur-sm transition-all hover:border-border">
+					<div class="flex flex-wrap items-center justify-between gap-2">
+						<span class="font-mono text-xs text-emerald-400 font-semibold uppercase tracking-wider">Phase 05 — Production Deployment</span>
+						<Badge variant="outline" class="font-mono text-[10px] text-muted-foreground bg-muted/20">Handover</Badge>
+					</div>
+					<h3 class="text-base font-semibold text-foreground">Acceptance Verification & Source Transfer</h3>
+					<p class="text-xs text-muted-foreground/90 leading-relaxed max-w-2xl">
+						Upon client sign-off against agreed acceptance criteria, we execute production migrations, transfer GitHub repository administrative controls, hand over environment secrets, and issue complete system documentation.
+					</p>
+					<div class="border-t border-border/40 pt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-muted-foreground">
+						<span class="text-foreground font-semibold">Deliverable:</span>
+						<span>• Repository Transfer</span>
+						<span>• Deployment Credentials</span>
+						<span>• Admin & API Manuals</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Phase 06 -->
+			<div class="relative group">
+				<div class="absolute -left-[31px] md:-left-[47px] top-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-border bg-background group-hover:border-emerald-500 group-hover:text-emerald-400 transition-colors">
+					<span class="h-1.5 w-1.5 rounded-full bg-muted-foreground group-hover:bg-emerald-400"></span>
+				</div>
+
+				<div class="space-y-3 border border-border/60 rounded-xl p-5 md:p-6 bg-card/30 backdrop-blur-sm transition-all hover:border-border">
+					<div class="flex flex-wrap items-center justify-between gap-2">
+						<span class="font-mono text-xs text-emerald-400 font-semibold uppercase tracking-wider">Phase 06 — Operations & Support</span>
+						<Badge variant="outline" class="font-mono text-[10px] text-muted-foreground bg-muted/20">Post-Launch</Badge>
+					</div>
+					<h3 class="text-base font-semibold text-foreground">SLA Maintenance & Ongoing Optimization</h3>
+					<p class="text-xs text-muted-foreground/90 leading-relaxed max-w-2xl">
+						Post-launch stability is guaranteed through a standard 30-day warranty period. Continued maintenance, infrastructure scaling, dependency upgrades, and operational monitoring are supported under monthly SLA retainer agreements.
+					</p>
+					<div class="border-t border-border/40 pt-2.5 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] font-mono text-muted-foreground">
+						<span class="text-foreground font-semibold">Deliverable:</span>
+						<span>• 30-Day Warranty</span>
+						<span>• Optional SLA Retainer</span>
+						<span>• Infrastructure Audits</span>
+					</div>
+				</div>
+			</div>
+
 		</div>
 	</section>
+
+	
 
 	<!-- Case Studies Section (Problem -> Built -> Result) -->
 	<section id="work" class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 space-y-8">
 		<div class="space-y-4">
 			<Badge variant="secondary" class="font-mono text-[11px] uppercase tracking-wider">Case Studies</Badge>
-			<h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Technical Deliverables</h2>
+			<h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Past Work</h2>
 		</div>
 
 		<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -262,6 +401,35 @@
 						</div>
 					</CardContent>
 				</Card>
+			{/each}
+		</div>
+	</section>
+
+	<!-- Technical Stack Section -->
+	<section id="architecture" class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="space-y-4 mb-12">
+			<Badge variant="secondary" class="font-mono text-[11px] uppercase tracking-wider">Architecture</Badge>
+			<h2 class="text-2xl sm:text-3xl font-bold tracking-tight">Core Technologies</h2>
+			<p class="text-sm text-muted-foreground max-w-xl">
+				Proven languages and frameworks chosen for reliability, security, and long-term maintainability.
+			</p>
+		</div>
+
+		<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+			{#each techStack as group}
+				<div class="border border-border/60 rounded-xl p-5 bg-card/40 space-y-4">
+					<h3 class="font-mono text-xs font-semibold text-foreground uppercase tracking-wider border-b border-border/40 pb-2">
+						{group.category}
+					</h3>
+					<ul class="space-y-2.5">
+						{#each group.items as item}
+							<li class="flex items-center gap-2 text-xs text-muted-foreground/90">
+								<CheckCircle2 class="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+								<span>{item}</span>
+							</li>
+						{/each}
+					</ul>
+				</div>
 			{/each}
 		</div>
 	</section>

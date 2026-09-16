@@ -145,7 +145,7 @@
 						<div class="flex flex-col gap-1.5 pt-1 text-xs font-mono text-muted-foreground/80">
 							<div class="flex items-center gap-1.5">
 								<MapPin class="h-3.5 w-3.5 text-foreground/70" />
-								<span>Nairobi, Kenya · Remote Services</span>
+								<span>Nairobi, Kenya · Remote · Worldwide</span>
 							</div>
 							<div class="flex items-center gap-1.5">
 								<Mail class="h-3.5 w-3.5 text-foreground/70" />
