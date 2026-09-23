@@ -76,7 +76,7 @@
 
 			<!-- Desktop Actions -->
 			<div class="hidden md:flex items-center gap-3">
-				<a
+				<!-- <a
 					href={siteConfig.links.personalPortfolio}
 					target="_blank"
 					rel="noreferrer"
@@ -84,7 +84,7 @@
 				>
 					<span>michael.querygraph.dev</span>
 					<ArrowUpRight class="h-3 w-3" />
-				</a>
+				</a> -->
 
 				<Separator orientation="vertical" class="h-4" />
 
@@ -121,9 +121,9 @@
 						</a>
 					{/each}
 				</nav>
-				<Separator class="my-2" />
+				<!-- <Separator class="my-2" /> -->
 				<div class="flex flex-col gap-3">
-					<a
+					<!-- <a
 						href={siteConfig.links.personalPortfolio}
 						target="_blank"
 						rel="noreferrer"
@@ -131,7 +131,7 @@
 					>
 						<span>michael.querygraph.dev</span>
 						<ArrowUpRight class="h-3.5 w-3.5" />
-					</a>
+					</a> -->
 					<Button variant="default" size="sm" class="w-full" onclick={openModal}>
 						Start a Project
 					</Button>
@@ -213,12 +213,12 @@
 								querygraph.dev
 							</a>
 						</li>
-						<!-- <li>
+						<li>
 							<a href="https://michael.querygraph.dev" target="_blank" rel="noreferrer" class="text-muted-foreground/90 hover:text-foreground transition-colors flex items-center gap-1">
 								michael.querygraph.dev
 								<ArrowUpRight class="h-3 w-3" />
 							</a>
-						</li> -->
+						</li>
 						<li class="text-muted-foreground/90 hover:text-foreground transition-colors">
 							<a onclick={()=>afterNavigate} href="/privacy" >Privacy Policy & Terms</a>
 						</li>
