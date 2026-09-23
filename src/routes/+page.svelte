@@ -130,10 +130,10 @@
 
 			<div class="flex flex-wrap items-center gap-4 pt-2">
 				<Button variant="default" size="lg" class="font-medium text-sm gap-2" onclick={openIntakeModal}>
-					<span>Discuss a Project</span>
-					<ArrowRight class="h-4 w-4" />
+					Discuss a Project
+					
 				</Button>
-				<a 
+				<!-- <a 
 					href="https://michael.querygraph.dev" 
 					target="_blank" 
 					rel="noreferrer" 
@@ -141,7 +141,7 @@
 				>
 					<span>michael.querygraph.dev</span>
 					<ArrowUpRight class="h-3.5 w-3.5" />
-				</a>
+				</a> -->
 			</div>
 
 			<div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-8 border-t border-border/40 w-full text-xs font-mono text-muted-foreground">

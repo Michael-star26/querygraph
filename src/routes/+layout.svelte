@@ -1,26 +1,33 @@
 <script lang="ts">
-	import '../app.css';
-	import { ModeWatcher } from 'mode-watcher';
-	import { siteConfig } from '$lib/config/site';
-	import { Button } from '$lib/components/ui/button';
-	import { Separator } from '$lib/components/ui/separator';
-	import { Badge } from '$lib/components/ui/badge';
-	import { slide } from 'svelte/transition';
-	import { Terminal, ArrowUpRight, Menu, X, Mail, MapPin } from 'lucide-svelte';
-	import ProjectModal from '$lib/components/ProjectModal.svelte';
+    import '../app.css';
+    import { ModeWatcher } from 'mode-watcher';
+    import { afterNavigate } from '$app/navigation'; // 1. Import afterNavigate
+    import { siteConfig } from '$lib/config/site';
+    import { Button } from '$lib/components/ui/button';
+    import { Separator } from '$lib/components/ui/separator';
+    import { Badge } from '$lib/components/ui/badge';
+    import { slide } from 'svelte/transition';
+    import { Terminal, ArrowUpRight, Menu, X, Mail, MapPin } from 'lucide-svelte';
+    import ProjectModal from '$lib/components/ProjectModal.svelte';
 
-	let { children } = $props();
-	let isMobileMenuOpen = $state(false);
-	let isProjectModalOpen = $state(false);
+    let { children } = $props();
+    let isMobileMenuOpen = $state(false);
+    let isProjectModalOpen = $state(false);
 
-	function toggleMobileMenu() {
-		isMobileMenuOpen = !isMobileMenuOpen;
-	}
+    // 2. Automatically close the mobile menu on every navigation
+    afterNavigate(() => {
+        isMobileMenuOpen = false;
+		isProjectModalOpen = false;
+    });
 
-	function openModal() {
-		isProjectModalOpen = true;
-		isMobileMenuOpen = false;
-	}
+    function toggleMobileMenu() {
+        isMobileMenuOpen = !isMobileMenuOpen;
+    }
+
+    function openModal() {
+        isProjectModalOpen = true;
+        isMobileMenuOpen = false; 
+    }
 </script>
 
 <ModeWatcher defaultMode="dark" />
@@ -206,14 +213,14 @@
 								querygraph.dev
 							</a>
 						</li>
-						<li>
+						<!-- <li>
 							<a href="https://michael.querygraph.dev" target="_blank" rel="noreferrer" class="text-muted-foreground/90 hover:text-foreground transition-colors flex items-center gap-1">
 								michael.querygraph.dev
 								<ArrowUpRight class="h-3 w-3" />
 							</a>
-						</li>
+						</li> -->
 						<li class="text-muted-foreground/90 hover:text-foreground transition-colors">
-							<a href="/privacy">Privacy Policy & Terms</a>
+							<a onclick={()=>afterNavigate} href="/privacy" >Privacy Policy & Terms</a>
 						</li>
 					</ul>
 				</div>
