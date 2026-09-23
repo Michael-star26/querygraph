@@ -68,7 +68,7 @@
 			built: 'Angular SPA frontend paired with a modular Flask REST API backend, JWT authentication, and structured MySQL storage.',
 			result: 'Deployed production platform with modular frontend/backend architecture and documented deployment workflow',
 			stack: ['Angular', 'NG-ZORRO', 'Flask', 'MySQL'],
-			link: 'https://michael.querygraph.dev'
+			link: 'https://sokofrontend.vercel.app'
 		},
 		{
 			title: 'QueryGraph Web Engine',
