@@ -660,7 +660,6 @@
 						I agree to the
 						<a
 							href="/privacy"
-							target="_blank"
 							rel="noopener noreferrer"
 							class="text-foreground underline"
 						>
