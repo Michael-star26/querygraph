@@ -147,15 +147,15 @@
 			<div class="grid grid-cols-2 sm:grid-cols-3 gap-6 pt-8 border-t border-border/40 w-full text-xs font-mono text-muted-foreground">
 				<div class="flex items-center gap-2 text-foreground/80">
 					<ShieldCheck class="h-4 w-4 text-emerald-400" />
-					<span>Production Ready</span>
+					<span>Frontend Engineering</span>
 				</div>
 				<div class="flex items-center gap-2 text-foreground/80">
 					<ShieldCheck class="h-4 w-4 text-emerald-400" />
-					<span>Strict Type Safety</span>
+					<span>Backend Systems</span>
 				</div>
 				<div class="flex items-center gap-2 text-foreground/80">
 					<Layers class="h-4 w-4 text-emerald-400" />
-					<span>Modular Systems</span>
+					<span>Data & Analytics</span>
 				</div>
 			</div>
 
