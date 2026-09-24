@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="100%" height="100%">
+  <defs>
+    <!-- Background subtle texture/gradient -->
+    <radialGradient id="bgGrad" cx="50%" cy="45%" r="75%">
+      <stop offset="0%" stop-color="#232931"/>
+      <stop offset="100%" stop-color="#161a22"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="1000" fill="url(#bgGrad)" />
+
+  <!-- Logo Group -->
+  <!-- 
+    Exact geometric layout based on the image:
+    Center: (500, 420)
+    Top-Left Circle: (356, 305)
+    Top-Right Circle: (644, 305)
+    Bottom Circle: (500, 595)
+  -->
+  <g transform="translate(0, -20)">
+    <!-- White rounded triangular path connecting the nodes -->
+    <path d="
+      M 390 325
+      L 610 325
+      C 630 325, 638 335, 626 355
+      L 538 515
+      C 525 538, 475 538, 462 515
+      L 374 355
+      C 362 335, 370 325, 390 325
+      Z
+    " fill="none" stroke="#ffffff" stroke-width="42" stroke-linejoin="round" stroke-linecap="round" />
+
+    <!-- Teal Circles (Nodes) -->
+    <!-- Top-Left Circle -->
+    <circle cx="356" cy="305" r="62" fill="#1fcb98" />
+    <!-- Top-Right Circle -->
+    <circle cx="644" cy="305" r="62" fill="#1fcb98" />
+    <!-- Bottom Circle -->
+    <circle cx="500" cy="595" r="62" fill="#1fcb98" />
+  </g>
+
+  <!-- Text: QueryGraph Codelabs -->
+  <!-- Matching font weight, letter spacing, and font style precisely -->
+  <text x="500" y="785" 
+        font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+        font-size="58" 
+        font-weight="500" 
+        fill="#ffffff" 
+        text-anchor="middle" 
+        letter-spacing="-0.5">
+    QueryGraph Codelabs
+  </text>
+</svg>
